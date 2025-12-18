@@ -261,14 +261,13 @@ pipeline {
             }
         }
 
-        // === 7. DEPLOY TO ECS (TUỲ CHỌN) ===
+        // === 7. FORCE DEPLOY TO ECS
         stage('Deploy to ECS') {
             steps {
                 echo "🔄 Cập nhật ECS service..."
                 script {
-                    // Thêm logic deploy ECS tại đây nếu cần
-                    // Ví dụ: aws ecs update-service --cluster your-cluster --service your-service --force-new-deployment
-                    echo "📋 Bước deploy ECS có thể được thêm sau"
+                    sh "aws ecs update-service --cluster quiz-ecs-cluster --service quiz-ecs-service --force-new-deployment"
+                    echo "📋 Force deploy completed"
                 }
             }
         }

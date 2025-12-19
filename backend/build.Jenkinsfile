@@ -265,9 +265,25 @@ pipeline {
         stage('Deploy to ECS') {
             steps {
                 echo "🔄 Cập nhật ECS service..."
-                script {
-                    sh "aws ecs update-service --cluster quiz-ecs-cluster --service quiz-ecs-service --force-new-deployment"
-                    echo "📋 Force deploy completed"
+                withCredentials([
+                    string(credentialsId: 'ECS_AWS_ACCESS_KEY_ID', variable: 'AWS_ACCESS_KEY_ID'),
+                    string(credentialsId: 'ECS_AWS_SECRET_ACCESS_KEY', variable: 'AWS_SECRET_ACCESS_KEY')
+                ]) {
+                    sh """
+                        # 1. Thiết lập biến môi trường cho AWS CLI
+                        export AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+                        export AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+                        export AWS_DEFAULT_REGION=${AWS_REGION}
+
+                        # 2. Chạy lệnh update service
+                        aws ecs update-service \
+                            --cluster quiz-ecs-cluster \
+                            --service quiz-ecs-service \
+                            --force-new-deployment \
+                            --region ${AWS_REGION}
+                        
+                        echo "📋 Force deploy completed"
+                    """
                 }
             }
         }

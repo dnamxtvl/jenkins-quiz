@@ -53,7 +53,7 @@ pipeline {
                     string(credentialsId: 'REVERB_APP_KEY', variable: 'REVERB_APP_KEY'),
                     string(credentialsId: 'REVERB_HOST', variable: 'REVERB_HOST'),
                     string(credentialsId: 'REVERB_APP_SECRET', variable: 'REVERB_APP_SECRET'),
-                    string(credentialsId: 'FRONT_END_URL', variable: 'FRONT_END_URL'),
+                    string(credentialsId: 'ECS_FRONT_END_URL', variable: 'ECS_FRONT_END_URL'),
                     string(credentialsId: 'GOOGLE_CLIENT_ID', variable: 'GOOGLE_CLIENT_ID'),
                     string(credentialsId: 'GOOGLE_CLIENT_SECRET', variable: 'GOOGLE_CLIENT_SECRET'),
                     string(credentialsId: 'GOOGLE_REDIRECT', variable: 'GOOGLE_REDIRECT'),
@@ -107,7 +107,7 @@ pipeline {
                         sed -i 's|^REVERB_APP_SECRET=.*|REVERB_APP_SECRET=${REVERB_APP_SECRET}|' .env
                         
                         # Frontend
-                        sed -i 's|^FRONT_END_URL=.*|FRONT_END_URL=${FRONT_END_URL}|' .env
+                        sed -i 's|^FRONT_END_URL=.*|FRONT_END_URL=${ECS_FRONT_END_URL}|' .env
                         
                         # Google OAuth
                         sed -i 's|^GOOGLE_CLIENT_ID=.*|GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}|' .env

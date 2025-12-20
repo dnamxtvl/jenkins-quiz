@@ -13,7 +13,7 @@ pipeline {
         // === 1. CLONE CODE ===
         stage('Checkout') {
             steps {
-                git branch: 'fix/add-tls-config-redis', 
+                git branch: 'production', 
                      url: 'https://github.com/dnamxtvl/laravel_quizze'
                 
                 sh """

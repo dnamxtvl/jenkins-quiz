@@ -51,7 +51,7 @@ pipeline {
                     string(credentialsId: 'AWS_URL', variable: 'AWS_URL'),
                     string(credentialsId: 'REVERB_APP_ID', variable: 'REVERB_APP_ID'),
                     string(credentialsId: 'REVERB_APP_KEY', variable: 'REVERB_APP_KEY'),
-                    string(credentialsId: 'REVERB_HOST', variable: 'REVERB_HOST'),
+                    string(credentialsId: 'ECS_REVERB_HOST', variable: 'ECS_REVERB_HOST'),
                     string(credentialsId: 'REVERB_APP_SECRET', variable: 'REVERB_APP_SECRET'),
                     string(credentialsId: 'ECS_FRONT_END_URL', variable: 'ECS_FRONT_END_URL'),
                     string(credentialsId: 'GOOGLE_CLIENT_ID', variable: 'GOOGLE_CLIENT_ID'),
@@ -103,7 +103,7 @@ pipeline {
                         # Reverb (WebSocket)
                         sed -i 's|^REVERB_APP_ID=.*|REVERB_APP_ID=${REVERB_APP_ID}|' .env
                         sed -i 's|^REVERB_APP_KEY=.*|REVERB_APP_KEY=${REVERB_APP_KEY}|' .env
-                        sed -i 's|^REVERB_HOST=.*|REVERB_HOST=${REVERB_HOST}|' .env
+                        sed -i 's|^REVERB_HOST=.*|REVERB_HOST=${ECS_REVERB_HOST}|' .env
                         sed -i 's|^REVERB_APP_SECRET=.*|REVERB_APP_SECRET=${REVERB_APP_SECRET}|' .env
                         
                         # Frontend
